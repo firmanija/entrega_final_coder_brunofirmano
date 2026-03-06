@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Catálogo de Juegos
+{% endblock %}
+
+{% block content %}
+
+<div style="background:#002f6c;color:white;padding:20px;margin-bottom:25px;text-align:center;border-radius:8px;">
+    <h1 style="margin:0;">🎮 GAMEFLIX</h1>
+    <p style="margin:5px 0;">Tu videoclub gamer online</p>
+    <small>Elegí tu juego favorito como en los viejos videoclubes de los 90</small>
+</div>
+
+<p>
+    <a href="/games/new/" style="font-weight:bold;">+ Nuevo juego</a>
+</p>
+
+<form method="get" style="margin-bottom:20px;">
+    <input type="text" name="q" placeholder="Buscar por título" value="{{ query|default:'' }}">
+    <button type="submit">Buscar</button>
+    <a href="/">Limpiar</a>
+</form>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;">
+
+    {% for g in games %}
+    <div style="background:white;padding:15px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+        <h3 style="margin-top:0;">{{ g.title }}</h3>
+
+        <p>
+            <strong>Plataforma:</strong> {{ g.platform }}<br>
+            <strong>Género:</strong> {{ g.genre }}<br>
+            <strong>Precio:</strong> ${{ g.price_per_rental }}
+        </p>
+
+        <p>
+            <a href="/games/{{ g.id }}/edit/">Editar</a> |
+            <a href="/games/{{ g.id }}/delete/">Eliminar</a>
+        </p>
+    </div>
+    {% empty %}
+    <p>No se encontraron juegos con ese título.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Planes
+{% endblock %}
+
+{% block content %}
+
+<h1 style="margin-bottom:20px;">Planes disponibles</h1>
+
+<p>
+    <a href="/plans/new/" style="font-weight:bold;">+ Nuevo plan</a>
+</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;">
+
+    {% for p in plans %}
+    <div style="background:white;padding:18px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+        <h3 style="margin-top:0;">{{ p.name }}</h3>
+
+        <p>
+            <strong>Precio mensual:</strong> ${{ p.monthly_price }}
+        </p>
+
+        <p>
+            Estado:
+            {% if p.is_active %}
+            <span style="color:green;">Activo</span>
+            {% else %}
+            <span style="color:red;">Inactivo</span>
+            {% endif %}
+        </p>
+
+        <p>
+            <a href="/plans/{{ p.id }}/edit/">Editar</a> |
+            <a href="/plans/{{ p.id }}/delete/">Eliminar</a>
+        </p>
+    </div>
+    {% empty %}
+    <p>No hay planes cargados.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}GAMEFLIX{% endblock %}</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; margin:40px; background:#f5f5f5;">
+
+<header style="display:flex; gap:15px; align-items:center; background:#003b8e; padding:15px; border-radius:8px; color:white;">
+
+    <strong style="font-size:22px;">🎮 GAMEFLIX</strong>
+
+    <a href="/" style="color:white;">Juegos</a>
+    <a href="/plans/" style="color:white;">Planes</a>
+    <a href="/rentals/" style="color:white;">Alquileres</a>
+    <a href="/about/" style="color:white;">About</a>
+
+    <span style="margin-left:auto;">
+
+        {% if user.is_authenticated %}
+
+            Hola, {{ user.username }} |
+
+            <form action="/logout/" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button style="cursor:pointer;">Logout</button>
+            </form>
+
+        {% else %}
+
+            <a href="/accounts/login/" style="color:white;">Login</a> |
+            <a href="/accounts/register/" style="color:white;">Register</a>
+
+        {% endif %}
+
+    </span>
+
+</header>
+
+<div style="margin-top:25px;">
+{% block content %}
+{% endblock %}
+</div>
+
+<footer style="margin-top:40px; text-align:center; color:#555; font-size:14px;">
+    <hr style="margin:20px 0;">
+    <p>GAMEFLIX © 2026 - Inspirado en los videoclubes clásicos de los 90</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+Eliminar
+{% endblock %}
+
+{% block content %}
+
+<h1>Confirmar eliminación</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p>¿Seguro que querés eliminar este elemento?</p>
+    <button type="submit">Sí, eliminar</button>
+</form>
+
+<p><a href="javascript:history.back()">Cancelar</a></p>
+
+{% endblock %}
