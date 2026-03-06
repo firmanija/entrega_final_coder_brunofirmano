@@ -1,126 +1,168 @@
 # GAMEFLIX 🎮
 
-### Plataforma de alquiler de videojuegos — Proyecto Django
+Proyecto final desarrollado con **Django**.
+GAMEFLIX es una plataforma web inspirada en los **videoclubes clásicos de los años 90**, donde los usuarios pueden explorar videojuegos disponibles, ver planes de suscripción y registrar alquileres.
 
-Bienvenido a **GAMEFLIX**.
-
-Este proyecto busca recrear la experiencia de los clásicos **videoclubes de los años 90**, donde uno podía recorrer estanterías llenas de juegos y elegir qué alquilar para el fin de semana.
-Inspirado en esa nostalgia, **GAMEFLIX** propone una versión web simple de un sistema de alquiler de videojuegos.
-
-El proyecto fue desarrollado como **entrega final del curso de Django**, cumpliendo con los requisitos de creación de modelos, CRUD, autenticación de usuarios y sistema de búsqueda.
+El objetivo del proyecto es demostrar el uso de Django para construir una aplicación web completa con modelos, vistas, templates, autenticación y CRUD.
 
 ---
 
-# Funcionalidades
+# Funcionalidades principales
+
+### Catálogo de videojuegos
+
+Los usuarios pueden visualizar una lista de videojuegos disponibles en la plataforma.
+
+También incluye un **formulario de búsqueda por título** para filtrar juegos.
+
+---
+
+### Gestión de planes
+
+El sistema permite crear y administrar **planes de suscripción**, donde cada plan puede tener diferentes precios.
+
+Ejemplo:
+
+* Plan Básico
+* Plan Premium
+* Plan Ilimitado
+
+---
+
+### Gestión de alquileres
+
+Permite registrar alquileres de videojuegos asociando:
+
+* Usuario
+* Juego
+* Fecha de alquiler
+
+---
+
+### Autenticación de usuarios
 
 El sistema incluye:
 
-* Catálogo de videojuegos
-* Búsqueda de juegos por título
-* Sistema de planes de alquiler
-* Registro de alquileres
-* Sistema de autenticación (Login / Logout / Register)
-* Panel de administración de Django
-* CRUD completo para los modelos principales
-* Uso de **herencia de plantillas (base.html)**
+* Login
+* Logout
+* Registro de usuario
+
+Utilizando el sistema de autenticación integrado de Django.
+
+---
+
+### Panel de administración
+
+Se utiliza el **admin de Django** para gestionar:
+
+* Juegos
+* Planes
+* Alquileres
+* Usuarios
+
+Usuario de prueba:
+
+```
+usuario: admin
+contraseña: 123
+```
 
 ---
 
 # Modelos del proyecto
 
-El sistema está compuesto por tres modelos principales:
+El sistema incluye **3 modelos principales**:
 
 ### Game
 
-Representa un videojuego disponible para alquilar.
+Representa los videojuegos disponibles.
 
 Campos principales:
 
-* título
-* plataforma
-* género
-* precio por alquiler
-* estado activo
+* title
+* platform
+* genre
+* price_per_rental
+* is_active
 
 ---
 
 ### Plan
 
-Representa los distintos planes de suscripción disponibles.
+Representa los planes de suscripción del sistema.
 
 Campos principales:
 
-* nombre del plan
-* precio mensual
-* estado activo
+* name
+* monthly_price
 
 ---
 
 ### Rental
 
-Representa un alquiler realizado por un usuario.
+Representa el alquiler de un videojuego por parte de un usuario.
 
 Campos principales:
 
-* usuario
-* videojuego
-* plan
-* tipo de alquiler
-* fecha de inicio
-* fecha de devolución
-* estado del alquiler
+* user
+* game
+* rental_date
 
 ---
 
-# Secciones principales de la web
+# Estructura del proyecto
 
-| Sección           | URL                   |
-| ----------------- | --------------------- |
-| Listado de juegos | `/`                   |
-| Planes            | `/plans/`             |
-| Alquileres        | `/rentals/`           |
-| Login             | `/accounts/login/`    |
-| Registro          | `/accounts/register/` |
-| Panel admin       | `/admin/`             |
-| About             | `/about/`             |
-
----
-
-# Búsqueda de videojuegos
-
-La página principal incluye un formulario que permite **buscar videojuegos por título**.
-
-Ejemplo:
-
-`/?q=mario`
-
----
-
-# Acceso al panel de administración
-
-Ruta:
-
-`/admin/`
-
-Usuario de prueba:
-
-Usuario
-`admin`
-
-Contraseña
-`123`
+```
+entrega_final_coder_brunofirmano/
+│
+├── GAMEFLIX/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── admin.py
+│   └── migrations/
+│
+├── templates/
+│   ├── base.html
+│   ├── about.html
+│   ├── registration/
+│   │   ├── login.html
+│   │   └── register.html
+│   └── GAMEFLIX/
+│       ├── game_list.html
+│       ├── plan_list.html
+│       ├── rental_list.html
+│       ├── form.html
+│       └── confirm_delete.html
+│
+├── manage.py
+├── requirements.txt
+└── db.sqlite3
+```
 
 ---
 
-# Cómo ejecutar el proyecto
+# Instalación y ejecución
 
-1. Crear entorno virtual
+1. Clonar el repositorio
+
+```
+git clone https://github.com/firmanija/entrega_final_coder_brunofirmano.git
+```
+
+2. Entrar al proyecto
+
+```
+cd entrega_final_coder_brunofirmano
+```
+
+3. Crear entorno virtual
 
 ```
 python -m venv .venv
 ```
 
-2. Activar entorno virtual
+4. Activar entorno virtual
 
 Windows:
 
@@ -128,25 +170,25 @@ Windows:
 .venv\Scripts\activate
 ```
 
-3. Instalar dependencias
+5. Instalar dependencias
 
 ```
-pip install django
+pip install -r requirements.txt
 ```
 
-4. Ejecutar migraciones
+6. Aplicar migraciones
 
 ```
 python manage.py migrate
 ```
 
-5. Iniciar servidor
+7. Ejecutar el servidor
 
 ```
 python manage.py runserver
 ```
 
-Abrir en el navegador:
+8. Abrir el navegador en
 
 ```
 http://127.0.0.1:8000
@@ -154,8 +196,19 @@ http://127.0.0.1:8000
 
 ---
 
+# Tecnologías utilizadas
+
+* Python
+* Django
+* SQLite
+* HTML (Django Templates)
+* Git
+* GitHub
+
+---
+
 # Autor
 
-**Bruno Firmano**
+Proyecto realizado por **Bruno Firmano** como entrega final del curso.
 
-Proyecto realizado como práctica final de Django, inspirado en los videoclubes clásicos de los años 90.
+Inspirado en los clásicos **videoclubes de los años 90**, donde elegir un juego para el fin de semana era parte de la experiencia.
