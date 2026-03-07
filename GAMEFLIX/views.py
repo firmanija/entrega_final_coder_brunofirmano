@@ -84,5 +84,9 @@ class PlanDeleteView(DeleteView):
 
 def rental_list(request):
     rentals = Rental.objects.all().order_by("-start_date")
-    return render(request, "GAMEFLIX/rental_list.html", {"rentals": rentals})
-    
+    games = Game.objects.filter(is_active=True).order_by("title")
+
+    return render(request, "GAMEFLIX/rental_list.html", {
+        "rentals": rentals,
+        "games": games,
+    })

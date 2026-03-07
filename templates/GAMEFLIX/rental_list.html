@@ -8,6 +8,41 @@ Alquileres
 
 <h1>Alquileres</h1>
 
+<h2>Juegos disponibles para alquilar</h2>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px; margin-bottom:30px;">
+
+    {% for g in games %}
+    <div style="background:white;padding:15px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+
+        {% if g.cover_url %}
+            <img src="{{ g.cover_url }}" alt="{{ g.title }}" style="width:100%; height:300px; object-fit:cover; border-radius:6px; margin-bottom:12px;">
+        {% else %}
+            <div style="width:100%; height:300px; background:#d9d9d9; border-radius:6px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; color:#666;">
+                Sin portada
+            </div>
+        {% endif %}
+
+        <h3 style="margin-top:0;">{{ g.title }}</h3>
+
+        <p>
+            <strong>Plataforma:</strong> {{ g.platform }}<br>
+            <strong>Género:</strong> {{ g.genre }}<br>
+            <strong>Precio por alquiler:</strong> ${{ g.price_per_rental }}
+        </p>
+
+        <p>
+            <a href="#">Alquilar</a>
+        </p>
+    </div>
+    {% empty %}
+    <p>No hay juegos disponibles.</p>
+    {% endfor %}
+
+</div>
+
+<h2>Alquileres registrados</h2>
+
 <ul>
     {% for r in rentals %}
     <li>

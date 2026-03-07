@@ -8,6 +8,7 @@ class Game(models.Model):
     genre = models.CharField(max_length=60, blank=True)
     price_per_rental = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(default=True)
+    cover_url = models.URLField(blank=True, null=True)
 
     def __str__(self) -> str:
         return self.title
